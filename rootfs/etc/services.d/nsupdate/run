@@ -14,7 +14,7 @@ NSIP=$(dig +short $DOMAIN @$NS | tail -1)
 
 bashio::log.info "$DOMAIN resolves to $NSIP, actual IP is $MYIP"
 
-[ "$MYIP" != "$NSIP" -a -n "$MYIP" -a -n "$NSIP" ] && { \ 
+[ "$MYIP" != "$NSIP" -a -n "$MYIP" -a -n "$NSIP" ] && {
   bashio::log.info "Updating."
   nsupdate -y hmac-"$HMAC:$KEYNAME:$SECRET" -v << EOF
 server $NS
