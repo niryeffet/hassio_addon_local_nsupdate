@@ -1,5 +1,5 @@
 # Nsupdate
-This is a Homeassistant local add-on to update remote bind9 with current IP address
+This is a minimalistic Homeassistant local add-on to update remote bind9 with current IP address
 
 Installation:
 * In Homeassistant, using ssh terminal clone to /addons.
