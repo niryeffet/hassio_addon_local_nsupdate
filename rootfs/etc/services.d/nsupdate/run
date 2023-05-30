@@ -1,0 +1,26 @@
+#!/usr/bin/with-contenv bashio
+
+IPAPI=$(bashio::config 'ip_api')
+NS=$(bashio::config 'nameserver')
+DOMAIN=$(bashio::config 'domain')
+ZONE=$(bashio::config 'zone')
+TTL=$(bashio::config 'ttl')
+KEYNAME=$(bashio::config 'keyname')
+SECRET=$(bashio::config 'secret')
+HMAC=$(bashio::config 'hmac')
+
+MYIP=$(curl -qs $IPAPI)
+NSIP=$(dig +short $DOMAIN @$NS | tail -1)
+
+bashio::log.info "$DOMAIN resolves to $NSIP, actual IP is $MYIP"
+
+[ "$MYIP" != "$NSIP" -a -n "$MYIP" -a -n "$NSIP" ] && { \ 
+  bashio::log.info "Updating."
+  nsupdate -y hmac-"$HMAC:$KEYNAME:$SECRET" -v << EOF
+server $NS
+zone $ZONE
+update delete $DOMAIN A
+update add $DOMAIN $TTL A $MYIP
+send
+EOF
+}

@@ -1,0 +1,29 @@
+name: Nsupdate
+description: Update bind9 IP record
+version: 1.0.4
+slug: nsupdate
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+options:
+  ip_api: "api.ipify.org"
+  nameserver: ""
+  domain: ""
+  zone: ""
+  ttl: 38400
+  keyname: ""
+  secret: ""
+  hmac: "sha256"
+schema:
+  ip_api: str
+  nameserver: str
+  domain: str
+  zone: str
+  ttl: int
+  keyname: str
+  secret: str
+  hmac: match(^md5$|^sha1$|^sha224$|^sha256$|^sha384$|^sha512$)
