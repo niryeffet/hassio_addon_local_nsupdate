@@ -1,6 +1,6 @@
 name: Nsupdate
 description: Update bind9 IP record
-version: 1.0.4
+version: 1.0.5
 slug: nsupdate
 init: false
 arch:
